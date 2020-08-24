@@ -20,5 +20,3 @@ but if the user is logged in, it will show option to play game or to see gamepla
 5) guessgame.html : this is html page which consists of game and javascript code needed for running the game. the game is guess the secret number from 0 to 100. the game have different difficulty levels which the user can choose. The input field which accepts numbers validate number by  javascript regular expression (some call it regex). The user is also given hints depending upon the user inputs. The userhistory is also saved if the user is logged-in.
 
 6) playerhistory.html : this is html page which show the user gameplay history like difficult level, whetter he won or lost, date-time , the secret number etc.
-
-I think the project satisfies the distinctiveness and complexity requirements because i haven't used javascript regular expression (some call it regex) and some of the functions u used in this project in previous CS50 web projects and i have learned it in curiosity to learn more about javascript. i also haven't used much javascript in my previous projects like i have used it only in one CS50 web project flack and Django models also.
