@@ -1,0 +1,55 @@
+{% extends "game/layout.html" %}
+
+{% block body %}
+
+{% if not user.is_authenticated %}
+<br /> <br />
+
+<center>
+
+  <!-- HEADINGS-->
+  <h1 class="font-weight-light"> Welcome To CS50W Guess A Secret Number Game</h1>
+
+  <br /> <br /> <br />
+
+  <h6 class="font-weight-light" > Please Login -OR- Register To Continue by Selecting From Below Options or Options In Navigation Bar</h6>
+  <h6 class="font-weight-light" > With An Account, Your Game History is Stored And you Can View It Any Time</h6>
+
+<!-- BUTTONS FOR LOGIN AND REGISTER-->
+  <div class="row">
+  <div class="col-6 col-md-6"> <a href="{% url 'login' %}" > <button type="button" class="btn btn-outline-danger">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbspLOGIN
+    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</button> </a></div>
+  <div class="col-6 col-md-6"> <a href="{% url 'register' %}" ><button type="button" class="btn btn-outline-danger">&nbsp &nbsp &nbsp &nbsp
+    &nbsp &nbsp &nbspREGISTER&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</button> </a> </div>
+</div>
+
+<br /> <br /> <br />
+
+<!-- BUTTONS FOR GAMEPLAY WITHOUT LOGIN-->
+<h6 class="font-weight-light"> Please Press the Button To Play The Game Without Logging-In</h6>
+<a href="/guessgame/NULL" ><button type="button" class="btn btn-outline-danger">Play Guess the Secret Number Game</button> </a>
+
+<br /><br />
+
+</center>
+{% endif %}  <!-- ENDING TAG FOR if not user.is_authenticated -->
+
+
+{% if user.is_authenticated %}
+<br /> <br /> <br />
+<center>
+  <h1>Hello, {{user.username}}!!</h1> <br />
+  <h2>Welcome To CS50W Guess A Secret Number Game (0-100)</h2>
+  <h6> Please Select From Options Below </h6>
+  <br />
+  <br />
+  <div class="row">
+  <div class="col-6 col-md-6"> <a href="/guessgame/{{user.id}}" > <button type="button" class="btn btn-outline-danger">Play Guess the Secret Number Game</button> </a></div>
+
+  <div class="col-6 col-md-6"> <a href="/showhistory/{{user.id}}" ><button type="button" class="btn btn-outline-danger">See GamePlay History
+  </button> </a> </div>
+</div>
+</center>
+{% endif %}
+
+{% endblock %}

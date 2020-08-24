@@ -1,0 +1,63 @@
+{% extends "game/layout.html" %}
+
+{% block body %}
+
+<br />
+<h1 align="center">Guess the Secret Number (0-100)</h1>
+
+
+<div style="visibility: hidden;" id="myMsg">
+  <center><div style= "background-color: yellow;width: 200px;border: 8px solid black;height: 90px;margin: 20px;">
+             <b>Time Left</b>
+             <b> <font size="5"><div id='emailmsg'></div></font> </b>
+  </div>
+  </center>
+</div>
+
+  <!-- GUESS HERE INPUT -->
+  <br />
+<form align="center" onKeyPress="if (event.which == 13) return false;">
+    <div style="visibility: hidden;" id="input">
+        Enter Guess Number Here <br /> <input type="text" id="guess" name="guess" >
+        <input type="button" onClick="checkanswers()" name="answer" value="Guess">
+    </div>
+</form>
+
+<br />
+
+  <!-- TIME SELECT -->
+<form name="timerform" align="center">
+    <div id="difficulity">
+        Difficulity Level: <input type="radio" name="time" value="60" checked /> Easy (60s)
+        <input type="radio" name="time" value="30"/> Medium (30s)
+        <input type="radio" name="time" value="20" /> hard(20s) <br />  <br />
+    </div>
+    <input type='button' onClick="startGame()" name='START' value='Start Game'/>
+</form>
+
+
+
+  <!-- GUIDE -->
+  <center>
+    <br />
+    <br />
+<h2 align="center">Guide Box (TIPS)</h2>
+
+<table align="center">
+<tr bgcolor="lightgray">
+    <center><th width="900" style="text-align:center" id="tips"> * Guess a number between 0 and 100</th>
+</tr>
+
+  <!-- HIDDEN FORM -->
+  <form id="HiddenForm" method="post" action="/end_game">
+  {% csrf_token %}
+  <input type="hidden" id="playerid" name="playerid" value="{{player}}">
+  <input type="hidden" id="difficulitylevel" name="difficulitylevel" value="N/A">
+  <input type="hidden" id="guessnumber" name="guessnumber" value="N/A">
+  <input type="hidden" id="status" name="status" value="N/A">
+  </form>
+
+  <form id="HiddenForm2" method="post" action="/guessgame/NULL">
+  {% csrf_token %}
+  </form>
+{% endblock %}

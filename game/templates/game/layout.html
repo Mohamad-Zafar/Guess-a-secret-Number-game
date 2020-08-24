@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Social game{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'game/styles.css' %}" rel="stylesheet">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        {% if user.is_authenticated %}
+        <script src="{% static 'game/usergame.js' %}"></script>
+        {% else %}
+        <script src="{% static 'game/nonusergame.js' %}"></script>
+        {% endif %}
+    </head>
+
+
+<!-- BODY -->
+
+{% if request.path == "/" %}
+
+<!-- SCRIPT TO CHANGE BACKGROUND IMAGE AFTER EVERY 5 SECONDS ONLY ON INDEX PAGE-->
+<script>
+var pix=['p1.jpg','p2.jpg','p3.jpg','p4.jpg','p5.jpg'];
+var timerID=setInterval("changePics()",5000);
+var c=0;
+
+function changePics(){
+var image = "/static/game/" + pix[c++%pix.length] ;
+document.body.style.backgroundImage = "url('" +image+ "')";
+}
+</script>
+
+<body id="bodyimg" style="background-color:	#F6F6EB;background-repeat: repeat; background-size:cover; ">
+
+{% else %}
+
+<body style="background-color: #F6F6EB;"x>
+
+{% endif %}
+
+      <!-- NAVIGATION BAR AND ITs JS SCRIPT-->
+      <div class="topnav" id="myTopnav">
+        <a href="{% url 'index' %}" class="btn-danger">Home</a>
+        {% if user.is_authenticated %}
+                <a href="/guessgame/{{user.id}}">Play Game</a>
+                <a href="/showhistory/{{user.id}}" >GamePlay History</a>
+                <a href="{% url 'logout' %}">Log Out</a>
+        {% else %}
+                <a href="{% url 'login' %}">Log In</a>
+                <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+
+
+      <script>
+      function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+      </script>
+      <!-- END OF NAVIGATION BAR AND ITs JS SCRIPT-->
+
+        <div class="body">
+            {% block body %}
+
+            {% endblock %}
+        </div>
+    </body>
+</html>
